@@ -1,0 +1,28 @@
+
+class Solution{
+    public:
+    int maxLen(vector<int>&A, int n)
+    {   
+        // Your code here
+        int len = 0;
+       
+        unordered_map<int,int>m;
+        int sum = 0;
+        for(int i=0; i<n; i++)
+        {
+            sum += A[i];
+            if(sum == 0)
+            len = i+1;
+            if(m.count(sum)){
+                len = max(len, i-m[sum]);
+            }
+            else{
+                m[sum] = i;
+            }
+        }
+        if(sum == 0)
+        return n;
+        else
+        return len;
+    }
+};
